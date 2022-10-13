@@ -10,23 +10,22 @@
 
 class Solution {
 public:
+    TreeNode* ans;
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        return solve(root, p, q);
+         solve(root, p, q);
+        return ans;
     }
     
-    TreeNode* solve(TreeNode* root, TreeNode* p, TreeNode* q){
-        if(!root)
-            return root;
-        if(root == p || root == q)
-            return root;
-        TreeNode* left = solve(root->left, p, q);
-        TreeNode* right = solve(root->right, p, q);
-        
-        if(!left)
-            return right;
-        if(!right)
-            return left;
-        return root;
+    void solve(TreeNode* root, TreeNode* p, TreeNode* q){
+        if(p->val > root->val && q->val > root->val){
+            solve(root->right, p, q);
+        }
+        else if(p->val < root->val && q->val < root->val){
+            solve(root->left, p, q);
+        }
+        else
+            ans = root;
+            
     }
     
 };
