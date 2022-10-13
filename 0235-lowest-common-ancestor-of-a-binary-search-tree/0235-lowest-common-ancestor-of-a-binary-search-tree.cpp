@@ -12,19 +12,19 @@ class Solution {
 public:
     TreeNode* ans;
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-         solve(root, p, q);
-        return ans;
+         
+        return solve(root, p, q);
     }
     
-    void solve(TreeNode* root, TreeNode* p, TreeNode* q){
+    TreeNode* solve(TreeNode* root, TreeNode* p, TreeNode* q){
         if(p->val > root->val && q->val > root->val){
-            solve(root->right, p, q);
+            return solve(root->right, p, q);
         }
         else if(p->val < root->val && q->val < root->val){
-            solve(root->left, p, q);
+            return solve(root->left, p, q);
         }
         else
-            ans = root;
+            return root;
             
     }
     
