@@ -13,7 +13,7 @@ int guessNumber(int n) {
         int maxNumber = n, minNumber = 1;
         while (true) {
             int meanNumber = (maxNumber - minNumber) / 2 + minNumber;
-            // Do NOT use (maxNumber+minNumber)/2 in case of over flow
+
             int res = guess(meanNumber);
             if (res == 0) { 
                 return meanNumber;
