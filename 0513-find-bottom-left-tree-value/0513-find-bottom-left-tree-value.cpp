@@ -21,7 +21,8 @@ public:
         while(!qu.empty()){
             cout << qu.front()->val << endl;
             left = qu.back()->val;
-            for(int i = 0; i < qu.size(); ++i){
+            int val = qu.size();
+            for(int i = 0; i < val; ++i){
                 TreeNode* temp = qu.front();
                 // cout << temp->val << endl;
                 if(temp->right)
