@@ -1,29 +1,31 @@
 class RandomizedSet {
 public:
-    vector <int> arr;
+    unordered_set<int>st;
+    RandomizedSet() {
+        
+    }
     
     bool insert(int val) {
-        for(int i = 0; i < arr.size(); ++i){
-            if(arr[i] == val)
-                return false;
+        if(!st.count(val)){
+            st.insert(val);
+            return true;
         }
-        arr.push_back(val);
-        return true;
+        return false;
     }
     
     bool remove(int val) {
-        for(int i = 0; i < arr.size(); ++i){
-            if(arr[i] == val){
-                arr.erase(arr.begin() + i);
-                return true;
-            }
+        if(st.count(val)){
+            st.erase(val);
+            return true;
         }
         return false;
     }
     
     int getRandom() {
-        int r = rand() % arr.size();
-        return arr[r];
+        if(!st.empty()){
+            return *next(st.begin(),rand()%st.size());
+        }
+        return 0;
     }
 };
 
