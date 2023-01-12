@@ -7,7 +7,7 @@
 <img alt="" src="https://assets.leetcode.com/uploads/2020/10/02/addtwonumber1.jpg" style="width: 483px; height: 342px;">
 <pre><strong>Input:</strong> l1 = [2,4,3], l2 = [5,6,4]
 <strong>Output:</strong> [7,0,8]
-<strong>Explanation</strong> 342 + 465 = 807.
+<strong>Explanation.</strong> 342 + 465 = 807.
 </pre>
 
 <p><strong class="example">Example 2:</strong></p>
