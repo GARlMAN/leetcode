@@ -24,7 +24,6 @@ class Solution {
                     //worjs for the "BB" edge case
                     if(s.charAt(i) == s.charAt(j)){
                         dp[i][j] = "" + s.charAt(i) + "" + s.charAt(j) + "";
-                         System.out.print( s.charAt(i) + "" + s.charAt(j) );
                     }
                     else
                         dp[i][j] = "";
