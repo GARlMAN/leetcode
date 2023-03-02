@@ -14,13 +14,16 @@ class Solution:
                 return
             inorder(root.left)
             arr.append(root)
+            new_arr.append(root.val)
             inorder(root.right)
         arr=[]
+        new_arr=[]
         inorder(root)
-        new_arr=sorted(arr,key=lambda x: x.val)
-        for i in range(len(arr)):
-            if arr[i]!=new_arr[i]:
-                arr[i].val, new_arr[i].val=new_arr[i].val, arr[i].val
-                break
+        new_arr = sorted(new_arr)
+        for index, i in enumerate(new_arr):
+            if(arr[index].val != i):
+                arr[index].val = i
+
+
         return root
         
