@@ -25,12 +25,11 @@ public:
                     head = temp->next;
                 else
                     forward->next = temp->next;
-                temp = temp->next; 
             }
-            else{
+            else
                 forward = temp;
-                temp = temp->next;                    
-            }
+            temp = temp->next;                    
+            
 
             
         }
