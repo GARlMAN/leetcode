@@ -7,5 +7,4 @@ class Solution:
             else:
                 ans.append(abs(i))
 
-        print(nums)
         return ans
