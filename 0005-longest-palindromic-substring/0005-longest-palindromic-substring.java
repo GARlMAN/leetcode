@@ -22,9 +22,9 @@ class Solution {
                 else if(k == 1){
                     
                     //worjs for the "BB" edge case
-                    if(s.charAt(i) == s.charAt(j)){
+                    if(s.charAt(i) == s.charAt(j))
                         dp[i][j] = "" + s.charAt(i) + "" + s.charAt(j) + "";
-                    }
+                    
                     else
                         dp[i][j] = "";
                 }
