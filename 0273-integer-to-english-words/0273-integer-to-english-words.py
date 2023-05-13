@@ -10,6 +10,8 @@ class Solution:
         end = len(num)
         j = 0
         ans = []
+        
+        #intuition is to check three numbers at a time interatively
         while(end > 0):
             start = end - 3 if end-3 >= 0 else 0
             temp_string = num[start : end]
