@@ -15,10 +15,11 @@ public:
         ListNode* top = NULL;
         while(temp){
             int count = 0;
+            //assingin the top to next values to avoid a loop
             stack<ListNode*> st;
             if(top && top->next == NULL)
                 top->next = temp;
-                
+            //loadign all values in the stack to reverse em    
             while(temp && count < k){
                 st.push(temp);
                 temp = temp->next;
@@ -27,7 +28,7 @@ public:
             
             if(count != k)
                 break;
-
+            //pointing to the reversed values
             while(!st.empty()){
                 if(top == NULL){
                     head = st.top();
@@ -38,14 +39,11 @@ public:
                 else{
 
                     top->next = st.top();
-                    top = top->next;
-
-
-                    
-                    
+                    top = top->next;             
                 }
                 
                 st.pop();
+                //loop edge case
                 if(st.empty())
                     top->next = NULL;
             }
