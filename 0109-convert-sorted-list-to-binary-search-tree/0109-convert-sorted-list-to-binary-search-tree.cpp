@@ -19,27 +19,29 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
-public:
-    TreeNode* sortedListToBST(ListNode* head) {
-        vector<int> arr;
-        while(head){
-            arr.push_back(head->val);
-            head = head->next;
+
+    class Solution {
+    public:
+        TreeNode *sortedListToBST(ListNode *head) {
+            if(!head) 
+                return NULL;
+            if(!head->next) return new TreeNode(head->val);
+            
+            ListNode* slow = head;
+            ListNode* fast = head;
+            ListNode* pre = head;
+            while(fast && fast->next) {
+                pre = slow;
+                slow = slow->next;
+                fast = fast->next->next;
+            }
+            pre->next = 0; // break two halves 
+            
+
+            TreeNode* root = new TreeNode(slow->val);
+            root->left = sortedListToBST(head);
+            root->right = sortedListToBST(slow->next);
+            
+            return root;
         }
-        
-        return solve(0, arr.size() - 1, arr);
-        
-    }
-    
-    TreeNode* solve(int start, int end, vector<int> arr){
-        if(start > end)
-            return NULL;
-        int mid   = (start + end)/2;
-        TreeNode* root = new TreeNode;
-        root->val = arr[mid];
-        root->left = solve(start, mid - 1, arr);
-        root->right = solve(mid + 1, end, arr);
-        return root;
-    }
-};
+    };
