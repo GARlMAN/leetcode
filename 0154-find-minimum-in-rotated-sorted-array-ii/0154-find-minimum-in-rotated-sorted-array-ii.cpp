@@ -3,6 +3,7 @@ public:
     int findMin(vector<int>& nums) {
         int lo = 0, hi = nums.size() - 1;
         int ans = INT_MAX;
+        //same solution using binary search
         while(lo <= hi){
             int mid = (lo + hi)/2;
             ans = min(ans, nums[mid]);
