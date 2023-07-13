@@ -15,7 +15,6 @@ public:
         return ans;
     }
     int solve(vector<vector<int>>& graph, int n,  vector<int> repeat){
-        int ans = 1;
         if(arr[n] != -1)
             return arr[n];
         if(repeat[n] == 1)
@@ -25,6 +24,6 @@ public:
             if(solve(graph, val, repeat) == 0)
                 return arr[n] = 0;
         
-        return arr[n] = ans;
+        return arr[n] = 1;
     }
 };
