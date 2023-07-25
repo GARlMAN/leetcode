@@ -1,13 +1,14 @@
 class Solution {
 public:
     bool containsDuplicate(vector<int>& nums) {
-        map<int, int> hash;
-        for(auto num : nums){
-            if(hash[num] == 1)
-                return true;
-            hash[num] = 1;
+        if (nums.size() == 1) return false;
+
+        unordered_set<int> s;
+
+        for (int num : nums) {
+            if (s.count(num)) return true;
+            s.insert(num);
         }
         return false;
-
     }
 };
