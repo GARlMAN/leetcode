@@ -2,20 +2,27 @@ class Solution {
 public:
     vector<string> ans;
     vector<string> generateParenthesis(int n) {
-        string a = "";
-        int m = 0;
-        solve(a, n , m);
+        stack<char> st;
+        solve("", st, n);
         return ans;
     }
-    void solve(string a, int n, int m){
-        if(n == 0 && m == 0){
-            ans.push_back(a);
+    
+    void solve(string s, stack<char> st, int n){
+        if(n == 0 && st.empty()){
+            ans.push_back(s);
             return;
         }
+
+        if(n > 0){
+            st.push('(');
+            solve(s + '(', st, n - 1);
+            st.pop();
+        }
+
         
-        if(m > 0)
-            solve(a+")", n, m - 1);
-        if(n > 0)
-            solve(a+"(", n-1, m + 1);
+       if(!st.empty()){
+            st.pop();
+            solve(s + ')', st, n);
+        }
     }
 };
