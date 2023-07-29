@@ -1,31 +1,27 @@
 class MinStack {
 public:
-    vector<int> st;
-    int minEl = INT_MAX;
+    vector <int> st1;
+    vector <int> st2;
+    
     void push(int val) {
-        minEl = min(minEl, val);
-        st.push_back(val);
+        st1.push_back(val);
+        if(st2.size() == 0 || st2[st2.size() - 1] >= val )
+            st2.push_back(val);
     }
     
     void pop() {
-        int a = st[st.size() - 1]; 
-        st.pop_back();
-        
-        if(a == minEl){
-            minEl = INT_MAX;
-
-            for(auto i : st)
-                minEl = min(i, minEl);
-
-        }
+        int a = st1[st1.size() - 1];
+        if(a == st2[st2.size() - 1])
+            st2.pop_back();
+        st1.pop_back();
     }
     
     int top() {
-        return st[st.size() - 1];
+        return st1[st1.size() - 1];
     }
     
     int getMin() {
-        return minEl;
+        return st2[st2.size() - 1];
     }
 };
 
