@@ -3,26 +3,22 @@ public:
     vector<string> ans;
     vector<string> generateParenthesis(int n) {
         stack<char> st;
-        solve("", st, n);
+        solve("", 0, n);
         return ans;
     }
     
-    void solve(string s, stack<char> st, int n){
-        if(n == 0 && st.empty()){
+    void solve(string s, int m, int n){
+        if(n == 0 && m == 0){
             ans.push_back(s);
             return;
         }
 
-        if(n > 0){
-            st.push('(');
-            solve(s + '(', st, n - 1);
-            st.pop();
-        }
+        if(n > 0)
+            solve(s + '(', m + 1, n - 1);
+
 
         
-       if(!st.empty()){
-            st.pop();
-            solve(s + ')', st, n);
-        }
+       if(m != 0)
+            solve(s + ')', m - 1, n);
     }
 };
