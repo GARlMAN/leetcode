@@ -10,22 +10,26 @@
 
 class Solution {
 public:
-    TreeNode* ans;
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-         
-        return solve(root, p, q);
-    }
-    
-    TreeNode* solve(TreeNode* root, TreeNode* p, TreeNode* q){
-        if(p->val > root->val && q->val > root->val){
-            return solve(root->right, p, q);
+        queue<TreeNode*> qu;
+        qu.push(root);
+        while(!qu.empty()){
+            int n = qu.size();
+            for(int i = 0; i < n; ++i){
+                TreeNode* temp = qu.front();
+                //code to see if it's the lowest common ancestor
+                if((temp->val <= p->val && temp->val >= q->val) || (temp->val <= q->val && temp->val >= p->val) )
+                    return temp;
+                
+                //level order traversal 
+                if(temp->left)
+                    qu.push(temp->left);
+                if(temp->right)
+                    qu.push(temp->right);
+                qu.pop();
+            }
+                
         }
-        else if(p->val < root->val && q->val < root->val){
-            return solve(root->left, p, q);
-        }
-        else
-            return root;
-            
+        return root;
     }
-    
 };
