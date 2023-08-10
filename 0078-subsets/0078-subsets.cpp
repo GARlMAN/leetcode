@@ -8,8 +8,7 @@ public:
         return ans;
     }
     void solve(vector<int>& nums, vector<int> a, int k) {
-        if(k == nums.size())
-            return;
+
         for(int i = k; i < nums.size(); ++i){
             a.push_back(nums[i]);
             ans.push_back(a);
