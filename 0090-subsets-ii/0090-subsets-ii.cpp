@@ -4,26 +4,17 @@ public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         vector<int> a;
         sort(nums.begin(), nums.end());
-        ans.push_back(a);
-        solve(nums, a , 0);
+        solve(nums, a, 0);
         return ans;
     }
-    
-    
-    void solve(vector<int>& nums, vector<int> a, int j){
-        if(j == nums.size())
-            return;
-            
-
-        for(int i = j; i < nums.size(); ++i){
-            a.push_back(nums[i]);
+    void solve(vector<int>& nums, vector<int> a, int k){
+        if(k == nums.size()){
             if (std::find(ans.begin(), ans.end(),a)==ans.end())
                 ans.push_back(a);
-            solve(nums, a, i+1);
-            a.pop_back();
-            
+            return;
         }
-        
-        
+        solve(nums, a, k + 1);
+        a.push_back(nums[k]);
+        solve(nums, a, k + 1);
     }
 };
