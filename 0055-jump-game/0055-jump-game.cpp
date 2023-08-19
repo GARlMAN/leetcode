@@ -1,11 +1,17 @@
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
-        int goal = nums.size() - 1;
-        for(int i = goal; i > -1; --i){
-            if(i + nums[i] >= goal)
-                goal = i;
+        int ans = 0;
+        int n = nums.size() - 1;
+        int curr = n;
+        if(n == 0)
+            return true;
+        for(int i = n - 1; i >= 0; --i){
+            cout << i + nums[i] << " " << curr;
+            if(i + nums[i] >= curr)
+                curr = i;
         }
-        return goal == 0 ? true : false;
+        
+        return curr == 0;
     }
 };
