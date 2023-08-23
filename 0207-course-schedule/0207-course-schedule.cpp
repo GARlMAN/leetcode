@@ -17,10 +17,11 @@ public:
     
     
     bool solve(int course, map<int, vector<int>> &graph){
-        if(hash[course])
-            return false;
+
         if(graph[course].size() == 0)
             return true;
+        if(hash[course])
+            return false;
         //if there's a loop
         
         hash[course] = 1;
@@ -31,14 +32,11 @@ public:
             bool temp = solve(val, graph);
 
             //this is the weird one
-            if(temp)
-                graph[course].erase(std::remove(graph[course].begin(), graph[course].end(), val), graph[course].end());
-            //min one
-            else
+            if(!temp)
                 return false;
         }
-            
-        hash[course] = 0;
+
+        graph[course] = {};
         //removinb element
         return true;
         
