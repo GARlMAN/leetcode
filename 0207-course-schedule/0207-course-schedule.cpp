@@ -17,24 +17,18 @@ public:
     
     
     bool solve(int course, map<int, vector<int>> &graph){
-
         if(graph[course].size() == 0)
             return true;
         if(hash[course])
             return false;
-        //if there's a loop
         
+        //if there's a loop
         hash[course] = 1;
         
-        //checking all the values
-        bool ans = true;
-        for(auto val : graph[course]){
-            bool temp = solve(val, graph);
-
-            //this is the weird one
-            if(!temp)
+        for(auto val : graph[course])
+            if(!solve(val, graph))
                 return false;
-        }
+
 
         graph[course] = {};
         //removinb element
