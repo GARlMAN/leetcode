@@ -11,71 +11,29 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode* temp1 = l1;
-        ListNode* temp2 = l2;
-        ListNode* ans = NULL;
-        ListNode* temp = NULL;
-        int add = 0;
-        while(temp2 && temp1){
-            
-            int sum = temp1->val + temp2->val;
-            ListNode* anstemp = new ListNode();
-            anstemp->val = add == 0 ? sum%10 : (sum + 1)%10;
-            if((sum+add) > 9)
-                add = 1;
-            else
-                add = 0;
-            if(!ans){
-                ans = anstemp;
-                temp = ans;
-            }
+        int carry = 0;
+        ListNode *prev = new ListNode(0);
+        ListNode *ans = l1;
+        while(l1 || l2  || carry){
+            int left = l1 ? l1->val : 0;
+            int right = l2 ? l2->val : 0;
+            int sum =  left + right + carry;
+            carry = sum >= 10 ? 1 : 0;
+            sum = sum % 10;
+            if(l1)
+                l1->val = sum;
             else{
-                temp->next = anstemp;
-                temp = temp->next;
+                ListNode *temp = new ListNode(sum);
+                prev->next = temp;
+                l1 = temp;
             }
-            
-            temp1 = temp1->next;
-            temp2 = temp2->next;
-        }
+            prev = l1;
+            l1 = l1->next;
+            if(l2)
+                l2 = l2->next;
 
-        if(temp1){
-            int t = temp1->val;
-            temp1->val = add == 0 ? temp1->val : (temp1->val + 1) % 10;
-            temp->next = temp1;
-            if(add != 0){
-                add = t + 1 > 9 ? 1 : 0;
-            }
-            temp = temp->next;
-        }
-        else if(temp2){
-            int t = temp2->val;
-            temp2->val = add == 0 ? temp2->val : (temp2->val + 1) % 10;
-            temp->next = temp2;
-            if(add != 0){
-                add = t + 1 > 9 ? 1 : 0;
-            }
-            temp = temp->next;
-        }
-        
-        
-        if(add != 0){
-
-            while(temp->next && add != 0){
-                 temp = temp->next;
-                add = temp->val + 1 > 9 ? 1 : 0;
-                temp->val = (temp->val + 1) % 10;
-               
-                }
-            
-            if(add != 0){
-    
-                    ListNode* anstemp = new ListNode();
-                    anstemp->val = 1;
-                    temp->next = anstemp;
-     
-            }
+                
         }
         return ans;
-        
     }
 };
