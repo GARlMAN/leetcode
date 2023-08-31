@@ -6,7 +6,7 @@ public:
         for(int i = 0; i < hand.size(); ++i){
             if(hash[hand[i]] == 0)
                 pq.push(hand[i]);
-            hash[hand[i]] += 1;
+            hash[hand[i]]++;
         }
         
         while(!pq.empty()){
@@ -15,8 +15,8 @@ public:
             for(int i = top; i < top + groupSize; ++i){
                 
                 if(hash[i] > 0){
-                    
-                    hash[i] -= 1;
+        
+                    hash[i]--;
                     if(hash[i] == 0)
                         if(i != pq.top())
                             return false;
