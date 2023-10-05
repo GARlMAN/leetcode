@@ -1,39 +1,23 @@
 class Solution {
 public:
-    vector<vector<int>> dp;
-    int coinChange(vector<int>& coins, int n, int amount)
-    {
-        if(n==0)
-            return 0;
-        if(amount == 0)
-        {
-            return 1;
-        }
-        if(dp[n][amount] != -1)
-        {
-            return dp[n][amount];
-        }
-        if(coins[n-1] > amount)
-        {
-            dp[n][amount] = coinChange(coins, n-1, amount);
-            return dp[n][amount];
-        }
-        dp[n][amount] = coinChange(coins, n, amount-coins[n-1]) + coinChange(coins, n-1, amount);
-        return dp[n][amount];
-    }
-    
     int change(int amount, vector<int>& coins) {
         int n = coins.size();
-        if(amount == 0) {
+        vector<vector<int>> dp(n, vector<int>(amount + 1, -1));
+        return solve(coins, amount, 0, dp);
+    }
+    
+    int solve(vector<int>& coins, int amount, int k, vector<vector<int>>& dp){
+        if(amount < 0)
+            return 0;
+        else if(amount == 0)
             return 1;
-        }
-        if(n==0)
-          return 0;
+        if(dp[k][amount] != -1)
+            return dp[k][amount];
+        int ans = 0;
+        for(int i = k; i < coins.size(); ++i)
+            ans += solve(coins, amount - coins[i], i, dp);
         
-        dp.resize(n+2,vector<int>(amount+2,-1));
-        
-        dp[n][amount] = coinChange(coins, n, amount);
-        return dp[n][amount];
-        
+        return dp[k][amount] = ans;
+            
     }
 };
