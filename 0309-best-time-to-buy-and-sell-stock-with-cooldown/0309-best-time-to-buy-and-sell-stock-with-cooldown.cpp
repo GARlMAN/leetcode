@@ -10,7 +10,8 @@ public:
         if(i >= prices.size())
             return 0;
         if(dp[{i, buying}])
-            return dp[{i, buying}];
+            return  dp[{i, buying}] == -1 ? 0 : dp[{i, buying}];;
+        
         int notbuying = solve(prices, i + 1, buying);
         if(buying){
             int buy = solve(prices, i + 1, !buying) - prices[i];
@@ -21,6 +22,7 @@ public:
             int sell = solve(prices, i + 2, !buying) + prices[i];
             dp[{i, buying}] = max(notbuying, sell);
         }
-        return dp[{i, buying}];
+        dp[{i, buying}] = dp[{i, buying}] == 0 ? -1 : dp[{i, buying}];
+        return dp[{i, buying}] == -1 ? 0 : dp[{i, buying}];
     }
 };
